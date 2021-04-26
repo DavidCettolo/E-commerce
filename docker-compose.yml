@@ -1,0 +1,22 @@
+version: '3'
+services:
+  Ecommerce-web:
+    container_name: Ecommerce-web
+    image: Ecommerce-web-20210426:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    ports:
+      - "8081:80"
+
+  Ecommerce-api:
+    container_name: Ecommerce-api
+    image: Ecommerce-web-20210426:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "8080:80"
+
+
+    
