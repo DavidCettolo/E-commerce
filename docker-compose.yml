@@ -3,16 +3,30 @@ services:
   Ecommerce-web:
     container_name: Ecommerce-web
     image: ecommerce-web-20210426:latest
-    build: ./E-commerce-web     
+    build:
+      context: .
+      dockerfile: ./E-commerce-web/Dockerfile  
     ports:
       - "8081:80"
 
   Ecommerce-api:
     container_name: Ecommerce-api
-    image: ecommerce-web-20210426:latest
-    build: ./E-commerce-api       
+    image: ecommerce-api-20210426:latest
+    build:
+      context: .
+      dockerfile: ./E-commerce-api/Dockerfile     
     ports:
       - "8080:80"
+
+  Ecommerce-db:
+    container_name: Ecommerce-db
+    image: mcr.microsoft.com/mssql/server
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Password1
+    ports:
+      - "1433:1433"
+
   
 
 
