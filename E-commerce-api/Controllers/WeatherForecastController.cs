@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace E_commerce_api.Controllers
 {
+
+    /// <summary>
+    /// This is the controller for Weather
+    /// <summary>
+
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
@@ -23,6 +28,10 @@ namespace E_commerce_api.Controllers
             _logger = logger;
         }
 
+
+        /// <summary>
+        /// This is for get of Weather
+        /// <summary>
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
