@@ -10,7 +10,7 @@ services:
       - "8080:80"
     depends_on:
       - ecommerce-item-api  
-      - commerce-cart-api
+      - ecommerce-cart-api
     environment: 
       - ITEM-API-URL=http:\\ecommerce-item-api
       - CART-API-URL=http:\\ecommerce-cart-api
@@ -50,17 +50,17 @@ services:
     ports:
       - "1433:1433"
    
-  # Test-db:
-  #   container_name: Test-db
-  #   image: test-db
-  #   build:
-  #     context: .
-  #     dockerfile: ./TestDb/Dockerfile    
-  #   environment:
-  #     - ACCEPT_EULA=Y
-  #     - SA_PASSWORD=Password1!
-  #   ports:
-  #     - "1432:1433"
+  Test-db:
+    container_name: Test-db
+    image: test-db
+    build:
+      context: .
+      dockerfile: ./TestDb/Dockerfile    
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Password1!
+    ports:
+      - "1432:1433"
     
 
   

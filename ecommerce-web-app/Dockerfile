@@ -12,6 +12,7 @@ COPY . .
 WORKDIR "/src/E-commerce-web"
 RUN dotnet build "E-commerce-web.csproj" -c Release -o /app/build
 
+
 FROM build AS publish
 RUN dotnet publish "E-commerce-web.csproj" -c Release -o /app/publish
 

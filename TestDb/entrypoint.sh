@@ -1,1 +1,1 @@
-/opt/mssql/bin/sqlservr & /usr/src/app/import.sh
+/usr/src/app/import.sh & /opt/mssql/bin/sqlservr

@@ -12,6 +12,7 @@ COPY . .
 WORKDIR "/src/E-commerce-api"
 RUN dotnet build "E-commerce-api.csproj" -c Release -o /app/build
 
+
 FROM build AS publish
 RUN dotnet publish "E-commerce-api.csproj" -c Release -o /app/publish
 
