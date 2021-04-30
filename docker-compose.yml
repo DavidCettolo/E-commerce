@@ -26,7 +26,7 @@ services:
     depends_on:
       - ecommerce-sql-db
     env_file:
-      - ./db-connection/connection.env
+      - ./ecommerce-db/connection.env
 
   ecommerce-cart-api:
     container_name: ecommerce-cart-api
@@ -39,28 +39,19 @@ services:
     depends_on:
       - ecommerce-sql-db
     env_file:
-      - ./db-connection/connection.env
+      - ./ecommerce-db/connection.env
 
   ecommerce-sql-db:
     container_name: ecommerce-sql-db
-    image: mcr.microsoft.com/mssql/server   
+    image: ecommerce-sql-db-2021:latest
+    build:
+      context: .
+      dockerfile: ./ecommerce-db/Dockerfile 
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=Password1!
     ports:
       - "1433:1433"
-   
-  Test-db:
-    container_name: Test-db
-    image: test-db
-    build:
-      context: .
-      dockerfile: ./TestDb/Dockerfile    
-    environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=Password1!
-    ports:
-      - "1432:1433"
     
 
   

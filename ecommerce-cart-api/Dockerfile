@@ -6,16 +6,16 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["ecommerce-item-api/ecommerce-item-api.csproj", "ecommerce-item-api/"]
-RUN dotnet restore "ecommerce-item-api/ecommerce-item-api.csproj"
+COPY ["ecommerce-cart-api/ecommerce-cart-api.csproj", "ecommerce-cart-api/"]
+RUN dotnet restore "ecommerce-cart-api/ecommerce-cart-api.csproj"
 COPY . .
-WORKDIR "/src/ecommerce-item-api"
-RUN dotnet build "ecommerce-item-api.csproj" -c Release -o /app/build
+WORKDIR "/src/ecommerce-cart-api"
+RUN dotnet build "ecommerce-cart-api.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "ecommerce-item-api.csproj" -c Release -o /app/publish
+RUN dotnet publish "ecommerce-cart-api.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ecommerce-item-api.dll"]
+ENTRYPOINT ["dotnet", "ecommerce-cart-api.dll"]

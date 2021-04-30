@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ecommerce_item_api.Controllers
+namespace ecommerce_cart_api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
