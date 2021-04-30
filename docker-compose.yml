@@ -1,31 +1,67 @@
 version: '3'
 services:
-  Ecommerce-web:
-    container_name: Ecommerce-web
-    image: ecommerce-web-20210426:latest
+  ecommerce-web-app:
+    container_name: ecommerce-web-app
+    image: ecommerce-web-app-2021:latest
     build:
       context: .
-      dockerfile: ./E-commerce-web/Dockerfile  
-    ports:
-      - "8081:80"
-
-  Ecommerce-api:
-    container_name: Ecommerce-api
-    image: ecommerce-api-20210426:latest
-    build:
-      context: .
-      dockerfile: ./E-commerce-api/Dockerfile     
+      dockerfile: ./ecommerce-web-app/Dockerfile  
     ports:
       - "8080:80"
+    depends_on:
+      - ecommerce-item-api  
+      - commerce-cart-api
+    environment: 
+      - ITEM-API-URL=http:\\ecommerce-item-api
+      - CART-API-URL=http:\\ecommerce-cart-api
 
-  Ecommerce-db:
-    container_name: Ecommerce-db
-    image: mcr.microsoft.com/mssql/server
+  ecommerce-item-api:
+    container_name: ecommerce-item-api
+    image: ecommerce-item-api-2021:latest
+    build:
+      context: .
+      dockerfile: ./ecommerce-item-api/Dockerfile     
+    ports:
+      - "8081:80"
+    depends_on:
+      - ecommerce-sql-db
+    env_file:
+      - ./db-connection/connection.env
+
+  ecommerce-cart-api:
+    container_name: ecommerce-cart-api
+    image: ecommerce-cart-api-2021:latest
+    build:
+      context: .
+      dockerfile: ./ecommerce-cart-api/Dockerfile     
+    ports:
+      - "8082:80"
+    depends_on:
+      - ecommerce-sql-db
+    env_file:
+      - ./db-connection/connection.env
+
+  ecommerce-sql-db:
+    container_name: ecommerce-sql-db
+    image: mcr.microsoft.com/mssql/server   
     environment:
       - ACCEPT_EULA=Y
-      - SA_PASSWORD=Password1
+      - SA_PASSWORD=Password1!
     ports:
       - "1433:1433"
+   
+  # Test-db:
+  #   container_name: Test-db
+  #   image: test-db
+  #   build:
+  #     context: .
+  #     dockerfile: ./TestDb/Dockerfile    
+  #   environment:
+  #     - ACCEPT_EULA=Y
+  #     - SA_PASSWORD=Password1!
+  #   ports:
+  #     - "1432:1433"
+    
 
   
 
