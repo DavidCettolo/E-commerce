@@ -25,7 +25,7 @@ BEGIN
     UserId int NOT NULL,
     C8 varchar(8) NOT NULL,
     Quantity int NOT NULL,
-    Date datetime NOT NULL
+    Date varchar(50) NOT NULL
   )
 END;
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Users')
