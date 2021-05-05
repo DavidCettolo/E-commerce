@@ -12,8 +12,8 @@ services:
       - ecommerce-item-api  
       - ecommerce-cart-api
     environment: 
-      - ITEM-API-URL=http:\\ecommerce-item-api
-      - CART-API-URL=http:\\ecommerce-cart-api
+      - ItemApiUrl=http:\\ecommerce-item-api
+      - CartApiUrl=http:\\ecommerce-cart-api
 
   ecommerce-item-api:
     container_name: ecommerce-item-api
