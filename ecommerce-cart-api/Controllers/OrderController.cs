@@ -1,11 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ecommerce_cart_api.Controllers
 {
@@ -15,11 +8,23 @@ namespace ecommerce_cart_api.Controllers
     {
         private readonly ISqlProvider<Order> _orderSqlProvider;
 
+        private readonly ISqlProvider<Order> _orderSqlProvider;
+
         public OrderController(ISqlProvider<Order> orderSqlProvider) => _orderSqlProvider = orderSqlProvider;
 
-        // POST api/<OrderController>
         [HttpPost]
-        public void Post([FromBody] Order order) => _orderSqlProvider.Insert(order);
+        public void Post([FromBody] Order order)
+        {
 
+            _orderSqlProvider.Insert(order);
+        }
     }
 }
+
+/*var order = new Order() { C8 = c8, Quantity = 1, Userid = 1111 };
+                var client = new MongoClient(connectionString);
+                var database = server.GetDatabase("test"); // "test" is the name of the database
+                var collection = database.GetCollection<Entity>("entities");
+                var entity = new Entity { Name = "Tom" };
+                collection.Insert(entity);
+                var id = entity.Id; // Insert will set the Id if necessary (as it was in this example)*/

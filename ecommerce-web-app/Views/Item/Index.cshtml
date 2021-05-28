@@ -4,11 +4,9 @@
     ViewData["Title"] = "Item";
 }
 
-<h1>Item</h1>
+<h1>Products</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -40,10 +38,18 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
+                @if (item.Quantity > 0)
+                {
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                }
+                else
+                {
+                    <text>Out of stock</text>
+                }
             </td>
             <td>
-                @Html.ActionLink("Buy", "Create","Cart", new { c8=item.C8 },null) 
+                @if(item.Quantity>0)
+                    @Html.ActionLink("Buy","Create","Cart", new { c8=item.C8 }) 
             </td>
         </tr>
 }

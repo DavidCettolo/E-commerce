@@ -31,6 +31,7 @@ namespace ecommerce_item_api
             }
 
             app.UseRouting();
+            
 
             app.UseAuthorization();
 

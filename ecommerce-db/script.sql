@@ -16,7 +16,12 @@ BEGIN
     Quantity int, 
   );
   INSERT INTO Items
-  VALUES (11111111,'Coca-cola','Bottiglia da 1 litro',10)
+  VALUES 
+  (11111111,'Coca-cola','1 liter bottle',10),
+  (22222222,'Fanta','1 liter bottle',15),
+  (33333333,'Pepsi','1 liter bottle',7),
+  (44444444,'Sprite','1 liter bottle',0),
+  (55555555,'Getorade','1 liter bottle',2)
 END;
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Cart')
 BEGIN

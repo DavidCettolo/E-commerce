@@ -24,7 +24,10 @@ namespace ecommerce_web_app
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSingleton<IApiGet<Item>,ItemApi>();
+            services.AddSingleton<IApiGet<Item>,ApiGet<Item>>();
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,11 +47,15 @@ namespace ecommerce_web_app
 
             app.UseAuthorization();
 
+
             app.UseEndpoints(endpoints =>
             {
+
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Item}/{action=Index}/{id?}");
+                     name: "default",
+                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
             });
         }
     }

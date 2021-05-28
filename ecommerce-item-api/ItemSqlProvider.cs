@@ -7,14 +7,10 @@ namespace ecommerce_item_api.Controllers
 {
     public class ItemSqlProvider: SqlProvider,ISqlProvider<Item>
     {
-        public ItemSqlProvider(string connectionString):base(connectionString)
-        {
-
-        }
+        public ItemSqlProvider(string connectionString) : base(connectionString) { }
 
         public IEnumerable<Item> GetItems()
         {
-            var items = new List<Item>();
             var query = $@"SELECT *
                            FROM Items";
 
@@ -25,19 +21,20 @@ namespace ecommerce_item_api.Controllers
 
             while (reader.Read())
             {
-                items.Add(new Item()
+                yield return new Item()
                 {
                     C8 = reader["C8"].ToString(),
                     Name = reader["Name"].ToString(),
                     Description = reader["Description"].ToString(),
                     Quantity = Convert.ToInt32(reader["Quantity"].ToString())
-                });
+                };
+               
             }
-            return items;
+            
 
         }
 
-        public void ModifyQuantity(string c8,string remove)
+        public void ReduceQuantity(string c8,string reduce)
         {
             var query = $@"UPDATE [dbo].[Items]
                            SET Quantity = Quantity - @remove
@@ -47,7 +44,7 @@ namespace ecommerce_item_api.Controllers
             using var command = new SqlCommand(query, connection);
             connection.Open();
             command.Parameters.AddWithValue("@c8", c8);
-            command.Parameters.AddWithValue("@remove", remove);
+            command.Parameters.AddWithValue("@remove", reduce);
 
             command.ExecuteNonQuery();
 

@@ -17,7 +17,7 @@ namespace ecommerce_item_api.Controllers
         public IEnumerable<Item> Get() => _itemSqlProvider.GetItems().ToArray();
 
         [HttpPut("{id}")]
-        public void Put(string id, [FromBody] string value) => _itemSqlProvider.ModifyQuantity(id, value);
+        public void Put(string id, [FromBody] string value) => _itemSqlProvider.ReduceQuantity(id, value);
 
     }
 }

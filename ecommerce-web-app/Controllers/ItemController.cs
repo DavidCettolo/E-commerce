@@ -13,10 +13,10 @@ namespace ecommerce_web_app.Controllers
 
         public ItemController(IApiGet<Item> apiGet) => _apiGet = apiGet;
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var itemUrl = $@"http://ecommerce-item-api/Item";
-            var items = _apiGet.GetApi(itemUrl);          
+            var itemUrl = $@"{Environment.GetEnvironmentVariable("ItemApiUrl")}/Item";
+            var items = await _apiGet.GetApiAsync(itemUrl);          
             return View(items);
         }
              

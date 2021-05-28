@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ecommerce_web_app
 {
-    public interface IApiGet<T>
+    public interface IApiGet<T> 
     {
-        IEnumerable<T> GetApi(string url);
+        Task<IEnumerable<T>> GetApiAsync(string url);
     }
 }
